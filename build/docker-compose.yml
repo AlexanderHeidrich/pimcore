@@ -1,0 +1,91 @@
+version: '2.1'
+
+services:
+
+  php-fpm:
+    volumes:
+      - ../project:/php:delegated
+    image: basilicom/php-fpm-pimcore:7.4-v0.1.0
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -x 'php-fpm'"]
+      interval: 1s
+      timeout: 5s
+      retries: 100
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      PIMCORE_INSTALL_COMMAND: ${PIMCORE_INSTALL_COMMAND}
+      PIMCORE_INSTALL_ADMIN_USERNAME: ${PIMCORE_INSTALL_ADMIN_USERNAME}
+      PIMCORE_INSTALL_ADMIN_PASSWORD: ${PIMCORE_INSTALL_ADMIN_PASSWORD}
+      PIMCORE_INSTALL_MYSQL_HOST_SOCKET: ${MYSQL_HOST}
+      PIMCORE_INSTALL_MYSQL_USERNAME: ${MYSQL_USER}
+      PIMCORE_INSTALL_MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      PIMCORE_INSTALL_MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      REDIS_HOST: ${REDIS_HOST}
+
+  nginx:
+    volumes:
+      - ../project:/php
+    image: basilicom/nginx-php-fpm-pimcore:latest
+    restart: "no"
+    depends_on:
+      php-fpm:
+        condition: service_healthy
+    ports:
+        - "${NGINX_HOST_PORT}:80"
+    logging:
+      driver: "none"
+
+  mysql:
+    image: mariadb:10.0
+    ports:
+      - "${MYSQL_HOST_PORT}:3306"
+    volumes:
+      - pimcore-mysqldb:/var/lib/mysql
+    restart: "no"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --innodb-large-prefix=1 --innodb_file_format=Barracuda --innodb_file_per_table=1
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    logging:
+      driver: "none"
+
+  redis:
+    image: basilicom/redis-pimcore:latest
+    restart: "no"
+    logging:
+      driver: "none"
+
+#  rabbitmq:
+#    restart: "no"
+#    image: "rabbitmq:3-management"
+#    hostname: "rabbitmq"
+#    ports:
+#      - "15672:15672"
+#    environment:
+#      RABBITMQ_DEFAULT_USER: "rabbitmq"
+#      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+#      RABBITMQ_DEFAULT_VHOST: "/"
+#
+#  selenium-grid:
+#    image: elgalu/selenium
+#    ports:
+#    - "4444:24444"
+#    - "5900:25900"
+#    environment:
+#      TZ: Europe/Berlin
+#      VNC_PASSWORD: vnc
+#    volumes:
+#    - /dev/shm:/dev/shm
+
+volumes:
+  pimcore-mysqldb:
+  pimcore-cache:

@@ -1,0 +1,13 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Basilicom",
+  "license": "MIT",
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.27.0"
+  },
+  "scripts": {
+    "build": ""
+  }
+}

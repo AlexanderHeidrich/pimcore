@@ -1,0 +1,58 @@
+# Phpstorm files - based on https://www.gitignore.io/api/phpstorm
+## User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+## Generated files
+.idea/**/contentModel.xml
+
+## Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Pimcore
+/project/node_modules
+/project/yarn-error.log
+/project/app/config/parameters.yml
+
+## local config
+/.env.local
+/.env.local.php
+/.env.*.local
+!/project/app/config/local
+/project/app/config/local/*
+!/project/app/config/local/.gitkeep
+
+## var
+/project/var/*
+!/project/var/.gitkeep
+!/project/var/classes/
+/project/var/classes/DataObject
+
+/project/var/config/*
+!/project/var/config
+/project/var/config/system.yml
+/project/var/config/debug-mode.php
+/project/var/config/maintenance.php
+/project/var/config/tag-manager.php
+/project/var/config/reports.php
+
+
+## web
+/project/web/var/tmp/*
+/project/web/sitemap*.xml
+/project/web/bundles/
+
+## vendor
+/project/vendor
+
+## phpunit (phpunit.xml.dist should be in the repository, phpunit.xml is for local overrides)
+/project/phpunit.xml
