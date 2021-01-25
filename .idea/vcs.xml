@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/../pimcore-field-translator-bundle" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/project/vendor/basilicom/pimcore-field-translator-bundle" vcs="Git" />
   </component>
 </project>
