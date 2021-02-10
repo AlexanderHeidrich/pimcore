@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../pimcore-field-translator-bundle/.idea/pimcore-field-translator-bundle.iml" filepath="$PROJECT_DIR$/../pimcore-field-translator-bundle/.idea/pimcore-field-translator-bundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pimcore-plugin-system-banner/.idea/pimcore-plugin-system-banner.iml" filepath="$PROJECT_DIR$/../pimcore-plugin-system-banner/.idea/pimcore-plugin-system-banner.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/testing.iml" filepath="$PROJECT_DIR$/.idea/testing.iml" />
     </modules>
   </component>

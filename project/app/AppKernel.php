@@ -11,6 +11,8 @@
  * @copyright  Copyright (c) Pimcore GmbH (http://www.pimcore.org)
  * @license    http://www.pimcore.org/license     GPLv3 and PEL
  */
+
+use Basilicom\PimcorePluginSystemBanner\PimcorePluginSystemBannerBundle;
 use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Pimcore\Kernel;
 
@@ -35,5 +37,7 @@ class AppKernel extends Kernel
         if (class_exists('\\Basilicom\\PathFormatterBundle\\BasilicomPathFormatterBundle')) {
             $collection->addBundle(new \Basilicom\PathFormatterBundle\BasilicomPathFormatterBundle);
         }
+
+        $collection->addBundle(new PimcorePluginSystemBannerBundle());
     }
 }
